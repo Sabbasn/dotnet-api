@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using dotnet_app.Models;
 using dotnet_app.bin;
 
 namespace dotnet_app.Services.CharacterService
@@ -12,20 +13,27 @@ namespace dotnet_app.Services.CharacterService
             new User (),
             new User {Id=1, Name = "Merry"}
         };
-        public List<User> AddUser(User user)
+        public async Task<ServiceResponse<List<User>>> AddUser(User user)
         {
+            var serviceResponse = new ServiceResponse<List<User>>();
             users.Add(user);
-            return users;
+            serviceResponse.Data = users;
+            return serviceResponse;
         }
 
-        public List<User> GetAllUsers()
+        public async Task<ServiceResponse<List<User>>> GetAllUsers()
         {
-            return users;
+            var serviceResponse = new ServiceResponse<List<User>>();
+            serviceResponse.Data = users;
+            return serviceResponse;
         }
 
-        public User GetUserById(int id)
+        public async Task<ServiceResponse<User>> GetUserById(int id)
         {
-            return users.FirstOrDefault(u => u.Id == id);
+            var serviceResponse = new ServiceResponse<User>();
+            var user = users.FirstOrDefault(u => u.Id == id);
+            serviceResponse.Data = user;
+            return serviceResponse;
         }
     }
 }
