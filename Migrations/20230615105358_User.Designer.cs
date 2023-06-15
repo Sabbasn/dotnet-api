@@ -11,8 +11,8 @@ using dotnet_app.Data;
 namespace dotnet_app.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230615091937_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20230615105358_User")]
+    partial class User
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -40,9 +40,13 @@ namespace dotnet_app.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Password")
+                    b.Property<byte[]>("PasswordHash")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<byte[]>("PasswordSalt")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
 
                     b.HasKey("Id");
 

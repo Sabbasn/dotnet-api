@@ -12,8 +12,7 @@ namespace dotnet_app
     {
         public AutoMapperProfile()
         {
-            CreateMap<User, GetUserDto>();
-            CreateMap<AddUserDto, User>();
+            CreateMap<RegisterUserDto, User>();
         }
     }
 }
