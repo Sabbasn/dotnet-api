@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using dotnet_app.bin;
+using dotnet_app.Models;
 using dotnet_app.Dtos.User;
+using dotnet_app.Dtos.Post;
 
 namespace dotnet_app
 {
@@ -13,6 +14,8 @@ namespace dotnet_app
         public AutoMapperProfile()
         {
             CreateMap<RegisterUserDto, User>();
+            CreateMap<Post, GetPostDto>();
+            CreateMap<AddPostDto, Post>();
         }
     }
 }

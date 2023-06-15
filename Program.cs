@@ -1,4 +1,5 @@
 using dotnet_app.Data;
+using dotnet_app.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -26,6 +27,7 @@ builder.Services.AddSwaggerGen(c => {
 });
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
+builder.Services.AddScoped<IPostService, PostService>();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {

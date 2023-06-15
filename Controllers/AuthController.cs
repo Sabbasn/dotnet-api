@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using dotnet_app.Dtos.User;
-using dotnet_app.bin;
-using dotnet_app.Data;
 using dotnet_app.Models;
+using dotnet_app.Data;
 using Microsoft.AspNetCore.Mvc;
 
 namespace dotnet_app.Controllers

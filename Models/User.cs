@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using dotnet_app.Models;
 
-namespace dotnet_app.bin
+namespace dotnet_app.Models
 {
     public class User
     {
@@ -13,6 +13,6 @@ namespace dotnet_app.bin
         public byte[] PasswordHash { get; set; } = Array.Empty<byte>();
         public byte[] PasswordSalt { get; set;} = Array.Empty<byte>();
         public string Email { get; set; } = "Email";
-        // public List<UserPost>? Posts { get; set; }
+        public List<Post>? Posts { get; set; }
     }
 }

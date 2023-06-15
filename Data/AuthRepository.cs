@@ -4,7 +4,6 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using dotnet_app.bin;
 using dotnet_app.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using dotnet_app.bin;
+using dotnet_app.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace dotnet_app.Data
@@ -15,5 +15,6 @@ namespace dotnet_app.Data
         }
 
         public DbSet<User> Users => Set<User>();
+        public DbSet<Post> Posts => Set<Post>();
     }
 }
