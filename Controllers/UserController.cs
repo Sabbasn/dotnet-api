@@ -34,15 +34,35 @@ namespace dotnet_app.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<ServiceResponse<List<GetUserDto>>>> AddUser(AddUserDto user) 
+        public async Task<ActionResult<ServiceResponse<List<GetUserDto>>>> AddUser(AddUserDto user)
         {
-            return Ok(await _userService.AddUser(user));
+            var response = await _userService.AddUser(user);
+            if (response.Data is null) {
+                return BadRequest(response);
+            }
+            return Ok(response);
         }
 
         [HttpPut]
         public async Task<ActionResult<ServiceResponse<List<GetUserDto>>>> UpdateUser(UpdateUserDto user) 
         {
+            var response = await _userService.UpdateUser(user);
+            if (response.Data is null) 
+            {
+                return NotFound(response);
+            }
             return Ok(await _userService.UpdateUser(user));
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<ServiceResponse<GetUserDto>>> DeleteUser(int id) 
+        {
+            var response = await _userService.DeleteUser(id);
+            if (response.Data is null) 
+            {
+                return NotFound(response);
+            }
+            return Ok(response);
         }
     }
 }
