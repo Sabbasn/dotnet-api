@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace dotnet_app.bin
+namespace dotnet_app.Dtos.User
 {
-    public class User
+    public class GetUserDto
     {
         public int Id { get; set; }
         public string Name { get; set; } = "Name";
