@@ -16,6 +16,7 @@ namespace dotnet_app
             CreateMap<RegisterUserDto, User>();
             CreateMap<Post, GetPostDto>();
             CreateMap<AddPostDto, Post>();
+            CreateMap<UpdatePostDto, Post>();
         }
     }
 }

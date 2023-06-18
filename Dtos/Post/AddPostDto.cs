@@ -9,7 +9,5 @@ namespace dotnet_app.Dtos.Post
     {
         public string Title { get; set; } = string.Empty;
         public string Text { get; set; } = string.Empty;
-        public DateTime TimePosted { get; set; } = DateTime.Now;
-        public int UserId { get; set; }
     }
 }

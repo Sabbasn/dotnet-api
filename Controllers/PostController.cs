@@ -6,9 +6,12 @@ using dotnet_app.Dtos.Post;
 using dotnet_app.Models;
 using dotnet_app.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace dotnet_app.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")] 
     public class PostController : ControllerBase
@@ -33,6 +36,7 @@ namespace dotnet_app.Controllers
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAllPosts()
         {
+            int id = int.Parse(User.Claims.FirstOrDefault(u => u.Type == ClaimTypes.NameIdentifier)!.Value); 
             var posts = await _postService.GetAllPosts();
             if (posts.Success == false)
             {

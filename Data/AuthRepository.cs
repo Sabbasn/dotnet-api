@@ -4,6 +4,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Text;
 using dotnet_app.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -70,13 +71,13 @@ namespace dotnet_app.Data
         {
             using var hmac = new System.Security.Cryptography.HMACSHA256();
             salt = hmac.Key;
-            hash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+            hash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
         }
 
         private static bool VerifyPasswordHash(string password, byte[] hash, byte[] salt)
         {
             using var hmac = new System.Security.Cryptography.HMACSHA256(salt);
-            var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+            var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
             return computedHash.SequenceEqual(hash);
         } 
 
@@ -90,7 +91,7 @@ namespace dotnet_app.Data
             var appSettingsToken = _configuration.GetSection("AppSettings:Token").Value 
             ?? throw new Exception("AppSettings.Token is null!");
 
-            SymmetricSecurityKey key = new(System.Text.Encoding.UTF8.GetBytes(appSettingsToken));
+            SymmetricSecurityKey key = new(Encoding.UTF8.GetBytes(appSettingsToken));
             SigningCredentials credentials = new(key, SecurityAlgorithms.HmacSha512Signature);
 
             var tokenDescriptor = new SecurityTokenDescriptor
