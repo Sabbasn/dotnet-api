@@ -37,7 +37,7 @@ namespace dotnet_app.Services
                 await _context.Posts.AddAsync(post);
                 await _context.SaveChangesAsync();
                 serviceResponse.Data = newPost;
-                serviceResponse.Message = "Successfully added Post!";
+                serviceResponse.Message = "Successfully added post!";
             }
             catch (Exception ex)
             {
