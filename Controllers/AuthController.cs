@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using dotnet_app.Dtos.User;
+using dotnet_app.Dtos.Auth;
 using dotnet_app.Models;
 using dotnet_app.Data;
 using Microsoft.AspNetCore.Mvc;
@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace dotnet_app.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("auth")]
     public class AuthController : ControllerBase
     {
         private readonly IAuthRepository _authRepository;
@@ -20,7 +20,7 @@ namespace dotnet_app.Controllers
             _authRepository = authRepository;
         }
 
-        [HttpPost("Register")]
+        [HttpPost("register")]
         public async Task<ActionResult<ServiceResponse<int>>> Register(RegisterUserDto request) 
         {
             var response = await _authRepository.Register(
@@ -35,7 +35,7 @@ namespace dotnet_app.Controllers
 
         }
 
-        [HttpPost("Login")]
+        [HttpPost("login")]
         public async Task<ActionResult<ServiceResponse<int>>> Login(LoginUserDto request) 
         {
             var response = await _authRepository.Login(request.Name, request.Password);

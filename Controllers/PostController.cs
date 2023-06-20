@@ -13,7 +13,7 @@ namespace dotnet_app.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("[controller]")] 
+    [Route("post")] 
     public class PostController : ControllerBase
     {
         private readonly IPostService _postService;
@@ -33,12 +33,24 @@ namespace dotnet_app.Controllers
             return Ok(post);
         }
 
-        [HttpGet("GetAll")]
-        public async Task<IActionResult> GetAllPosts()
+        [HttpGet("getuserposts")]
+        public async Task<IActionResult> GetUserPosts()
         {
             int id = int.Parse(User.Claims.FirstOrDefault(u => u.Type == ClaimTypes.NameIdentifier)!.Value); 
-            var posts = await _postService.GetAllPosts();
+            var posts = await _postService.GetUserPosts();
             if (posts.Success == false)
+            {
+                return NotFound(posts);
+            }
+            return Ok(posts);
+        }
+
+        [HttpGet("getall")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetAllPosts()
+        {
+            var posts = await _postService.GetAllPosts();
+            if (!posts.Success)
             {
                 return NotFound(posts);
             }

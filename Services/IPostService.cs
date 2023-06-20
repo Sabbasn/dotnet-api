@@ -5,6 +5,7 @@ namespace dotnet_app.Services
 {
     public interface IPostService
     {
+        Task<ServiceResponse<List<GetPostDto>>> GetUserPosts();
         Task<ServiceResponse<List<GetPostDto>>> GetAllPosts();
         Task<ServiceResponse<GetPostDto>> GetPost(int id);
         Task<ServiceResponse<AddPostDto>> AddPost(AddPostDto newPost);

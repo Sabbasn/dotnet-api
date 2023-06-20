@@ -1,3 +1,4 @@
+using System.Net;
 using dotnet_app.Data;
 using dotnet_app.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -41,6 +42,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateAudience = false
         };
     });
+
+builder.Services.AddHttpsRedirection(options => {
+    options.RedirectStatusCode = (int)HttpStatusCode.TemporaryRedirect;
+    options.HttpsPort = 5001;
+});
 
 var app = builder.Build();
 

@@ -68,7 +68,7 @@ namespace dotnet_app.Services
             return serviceResponse;
         }
 
-        public async Task<ServiceResponse<List<GetPostDto>>> GetAllPosts()
+        public async Task<ServiceResponse<List<GetPostDto>>> GetUserPosts()
         {
             var serviceResponse = new ServiceResponse<List<GetPostDto>>();
             try
@@ -124,6 +124,17 @@ namespace dotnet_app.Services
                 serviceResponse.Success = false;
                 serviceResponse.Message = ex.Message;
             }
+            return serviceResponse;
+        }
+
+        public async Task<ServiceResponse<List<GetPostDto>>> GetAllPosts()
+        {
+            var serviceResponse = new ServiceResponse<List<GetPostDto>>();
+            List<GetPostDto> posts = await _context.Posts
+                .Include(p => p.User)
+                .Select(p => _mapper.Map<GetPostDto>(p))
+                .ToListAsync();
+            serviceResponse.Data = posts;
             return serviceResponse;
         }
     }

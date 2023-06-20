@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using dotnet_app.Models;
-using dotnet_app.Dtos.User;
+using dotnet_app.Dtos.Auth;
 using dotnet_app.Dtos.Post;
 
 namespace dotnet_app
