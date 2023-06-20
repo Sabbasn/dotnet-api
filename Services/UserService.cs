@@ -8,6 +8,7 @@ using System.Text;
 using dotnet_app.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using dotnet_app.Dtos.Auth;
 
 namespace dotnet_app.Data
 {
@@ -55,6 +56,21 @@ namespace dotnet_app.Data
             await _context.SaveChangesAsync();
             
             response.Data = user.Id;
+            return response;
+        }
+
+        public async Task<ServiceResponse<GetUserDto>> GetUser(int id)
+        {
+            var response = new ServiceResponse<GetUserDto>();
+            User user = await _context.Users.FirstOrDefaultAsync(u => u.Id == id)
+                ?? throw new Exception($"UserID: {id} does not exist!");
+            GetUserDto userDto = new()
+            {
+                Id = user.Id,
+                Name = user.Name,
+                Email = user.Email,
+            };
+            response.Data = userDto;
             return response;
         }
 

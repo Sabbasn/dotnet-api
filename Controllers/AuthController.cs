@@ -47,5 +47,16 @@ namespace dotnet_app.Controllers
             return Ok(response);
 
         }
+
+        [HttpGet("user/{id}")]
+        public async Task<ActionResult<ServiceResponse<GetUserDto>>> GetUser(int id) 
+        {
+            var response = await _authRepository.GetUser(id);
+            if(!response.Success)
+            {
+                return NotFound(response);
+            }
+            return Ok(response);
+        }
     }
 }
